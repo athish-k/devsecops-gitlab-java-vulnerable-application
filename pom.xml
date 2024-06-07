@@ -65,10 +65,65 @@
 		    <version>0.10.5</version>
 		    <scope>runtime</scope>
 		</dependency>
+<!--#Change 1 for SAST - Changes for Unit Test Coverage Percentage Update on SonarCloud Dashboard
+#By ASecurityGuru
+#Default Location of CodeCoverage File is target/site/jacoco/jacoco.xml, target/site/jacoco-it/jacoco.xml, build/re
+-->
+		<dependency>
+		    <groupId>junit</groupId>
+		    <artifactId>junit</artifactId>
+		    <version>4.12</version>
+		    <scope>test</scope>
+		</dependency>	
 	</dependencies>
 
 	<build>
 		<plugins>
+<!--#Change 2 for SAST - Added Jacoco Plugin - Changes for Unit Test Coverage Percentage Update on SonarCloud Dasboard
+#By ASecurityGuru
+#Default Location of CodeCoverage File is target/site/jacoco/jacoco.xml, target/site/jacoco-it/jacoco.xml, build/reports/jacoco/test/jacocoTestReport.
+-->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.7</version>
+				<executions>
+					<execution>
+						<id>prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<formats>
+								<format>XML</format>
+							</formats>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+<!--# Changes for Software Composition Analysis Scan using Synk
+#By ASecurityGuru
+-->
+			<plugin>
+				<groupId>io.synk</groupId>
+				<artifactId>synk-maven-plugin</artifactId>
+				<version>2.0.0</version>
+				<inherited>false</inherited>
+				<configuration>
+					<org>athish-k</org>
+				</configuration>
+			</plugin>
+<!-- Synk Changes for SCA Ends Here -->
+
+			
+			
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
